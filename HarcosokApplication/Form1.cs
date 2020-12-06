@@ -19,8 +19,7 @@ namespace HarcosokApplication
         {
             InitializeComponent();
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void kapcsolatLetrehozas()
         {
             //Kapcsolat létrehozása
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
@@ -30,15 +29,27 @@ namespace HarcosokApplication
             sb.Database = "cs_harcosok";
             sb.CharacterSet = "utf8";
             conn = new MySqlConnection(sb.ToString());
+            conn.Open();
+            sql = conn.CreateCommand();
+        }
+        private void kapcsolatBontas()
+        {
+            conn.Close();
+        }
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            
             try
             {
-
-                conn.Open();
-                sql = conn.CreateCommand();
+                kapcsolatLetrehozas();
+                
                 sql.CommandText = @"CREATE TABLE IF NOT EXISTS `harcosok` ( 
                                     `id` INT NOT NULL AUTO_INCREMENT , 
                                     `nev` VARCHAR(128) NOT NULL , 
-                                    `letrehozas` DATE NOT NULL ,
+                                    `letrehozas` DATETIME NOT NULL ,
                                     PRIMARY KEY (`id`), 
                                     UNIQUE (`nev`)) ENGINE = InnoDB;";
                 sql.ExecuteNonQuery();
@@ -57,8 +68,48 @@ namespace HarcosokApplication
                 MessageBox.Show(ex.Message, "Adatkapcsolati hiba");
                 return;
             }
+            kapcsolatBontas();
+        }
 
-            conn.Close();
+        
+        private void btnHarcosLetrehozas_Click(object sender, EventArgs e)
+        {
+            kapcsolatLetrehozas();
+            string nev = harcosNeveTextBox.Text.Trim();
+            if (nev == "")
+            {
+                MessageBox.Show("Adja meg a harcos nevét!");
+                harcosNeveTextBox.Focus();
+                return;
+            }
+            string query = "SELECT * FROM harcosok WHERE nev = '" + nev+"'";
+            using (MySqlCommand command = new MySqlCommand(query, conn))
+            {
+                MySqlDataReader reader = command.ExecuteReader();
+                
+                if (!reader.HasRows)
+                {
+                    var datum = DateTime.Now.ToString("yyyy-MM-dd ");
+                    
+                    reader.Close();
+                    sql.CommandText = "INSERT INTO harcosok (`nev`, `letrehozas`) VALUES ('" + nev + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                    sql.ExecuteNonQuery();
+                    harcosNeveTextBox.Clear();
+                    MessageBox.Show("Sikeres harcos felvétel!");
+                    harcosNeveTextBox.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Ilyen nevű harcos már létezik!");
+                    harcosNeveTextBox.Focus();
+                }
+                
+            }
+                        
+                    kapcsolatBontas();
+             
+                        
+
 
         }
     }

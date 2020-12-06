@@ -83,6 +83,7 @@
             this.btnHarcosLetrehozas.TabIndex = 3;
             this.btnHarcosLetrehozas.Text = "Létrehozás";
             this.btnHarcosLetrehozas.UseVisualStyleBackColor = true;
+            this.btnHarcosLetrehozas.Click += new System.EventHandler(this.btnHarcosLetrehozas_Click);
             // 
             // label3
             // 
