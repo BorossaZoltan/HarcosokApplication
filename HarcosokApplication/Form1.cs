@@ -34,6 +34,22 @@ namespace HarcosokApplication
             {
                 conn.Open();
                 sql = conn.CreateCommand();
+                sql.CommandText = @"CREATE TABLE IF NOT EXISTS `harcosok` ( 
+                                    `id` INT NOT NULL AUTO_INCREMENT , 
+                                    `nev` VARCHAR(128) NOT NULL , 
+                                    `letrehozas` DATE NOT NULL ,
+                                    PRIMARY KEY (`id`), 
+                                    UNIQUE (`nev`)) ENGINE = InnoDB;";
+                sql.ExecuteNonQuery();
+                sql.CommandText = @"CREATE TABLE IF NOT EXISTS `kepessegek` ( 
+                                    `id` INT NOT NULL AUTO_INCREMENT , 
+                                    `nev` VARCHAR(128) NOT NULL , 
+                                    `leiras` VARCHAR(500) NOT NULL , 
+                                    `harcos_id` INT NOT NULL , 
+                                    PRIMARY KEY (`id`),
+                                    FOREIGN KEY (`harcos_id`) REFERENCES harcosok(`id`))
+                                    ENGINE = InnoDB;";
+                sql.ExecuteNonQuery();
             }
             catch (MySqlException ex)
             {
