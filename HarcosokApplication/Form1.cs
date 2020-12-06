@@ -32,6 +32,7 @@ namespace HarcosokApplication
             conn = new MySqlConnection(sb.ToString());
             try
             {
+
                 conn.Open();
                 sql = conn.CreateCommand();
                 sql.CommandText = @"CREATE TABLE IF NOT EXISTS `harcosok` ( 
