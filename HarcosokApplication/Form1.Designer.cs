@@ -207,6 +207,7 @@
             this.btnModosit.TabIndex = 17;
             this.btnModosit.Text = "Módosít";
             this.btnModosit.UseVisualStyleBackColor = true;
+            this.btnModosit.Click += new System.EventHandler(this.btnModosit_Click);
             // 
             // kepessegekListBox
             // 

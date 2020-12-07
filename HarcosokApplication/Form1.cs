@@ -258,5 +258,38 @@ namespace HarcosokApplication
 
             kapcsolatBontas();
         }
+
+        private void btnModosit_Click(object sender, EventArgs e)
+        {
+            kapcsolatLetrehozas();
+            if (kepessegekListBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Nincs kiválasztva képesség, aminek lehetne módosítani a leírását!");
+                kepessegekListBox.Focus();
+                return;
+            }
+
+            sql.CommandText = @"SELECT `nev`, `leiras` FROM `kepessegek` WHERE `nev` = '"+kepessegekListBox.SelectedItem+"'";
+            using (MySqlDataReader dr = sql.ExecuteReader())
+            {
+                dr.Read();
+                if (dr.GetString("leiras") != kepessegLeirasaTextBox.Text)
+                {
+                    dr.Close();
+                    sql.CommandText = @"UPDATE `kepessegek` SET `leiras`= '"+kepessegLeirasaTextBox.Text+"' WHERE `nev` = '"+kepessegekListBox.SelectedItem+"'";
+                    sql.ExecuteNonQuery();
+                    kepessegekListBoxFrissit();
+                    kepessegLeirasaTextBox.Text = "";
+                    MessageBox.Show("Sikeres képesség leírás módosítás!");
+                }
+                else
+                {
+                    MessageBox.Show("A változtatás nem történt meg, mert ugyan az a eredeti leírás!");
+                }
+            }
+            
+            kapcsolatBontas();
+            
+        }
     }
 }
