@@ -197,6 +197,7 @@
             this.btnTorles.TabIndex = 16;
             this.btnTorles.Text = "Törlés";
             this.btnTorles.UseVisualStyleBackColor = true;
+            this.btnTorles.Click += new System.EventHandler(this.btnTorles_Click);
             // 
             // btnModosit
             // 

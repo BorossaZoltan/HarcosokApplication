@@ -237,6 +237,24 @@ namespace HarcosokApplication
                     kepessegLeirasaTextBox.Text = dr.GetString("leiras");
                 }
             }
+            kapcsolatBontas();
+        }
+
+        private void btnTorles_Click(object sender, EventArgs e)
+        {
+            kapcsolatLetrehozas();
+
+            if (kepessegekListBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Nincs kiválasztva törlendő képesség!");
+                kepessegekListBox.Focus();
+                return;
+            }
+            sql.CommandText = @"DELETE FROM `kepessegek` WHERE `nev` = '"+kepessegekListBox.SelectedItem+"'";
+            sql.ExecuteNonQuery();
+            kepessegLeirasaTextBox.Text = "";
+            kepessegekListBoxFrissit();
+            MessageBox.Show("Sikeres képesség törlés");
 
             kapcsolatBontas();
         }
