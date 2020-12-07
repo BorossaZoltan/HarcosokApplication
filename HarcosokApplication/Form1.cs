@@ -68,10 +68,23 @@ namespace HarcosokApplication
                 MessageBox.Show(ex.Message, "Adatkapcsolati hiba");
                 return;
             }
+            hasznaloComboFeltolt();
             kapcsolatBontas();
         }
 
-        
+        private void hasznaloComboFeltolt()
+        {
+            hasznaloComboBox.Items.Clear();
+            sql.CommandText = "SELECT nev FROM harcosok;";
+            using (MySqlDataReader dr = sql.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    hasznaloComboBox.Items.Add(dr.GetString("nev"));
+                }
+            }
+        }
+
         private void btnHarcosLetrehozas_Click(object sender, EventArgs e)
         {
             kapcsolatLetrehozas();
@@ -97,6 +110,7 @@ namespace HarcosokApplication
                     harcosNeveTextBox.Clear();
                     MessageBox.Show("Sikeres harcos felvétel!");
                     harcosNeveTextBox.Focus();
+                    hasznaloComboFeltolt();
                 }
                 else
                 {
@@ -110,6 +124,11 @@ namespace HarcosokApplication
              
                         
 
+
+        }
+
+        private void btnHozzaad_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -135,6 +135,7 @@
             this.btnHozzaad.TabIndex = 9;
             this.btnHozzaad.Text = "Hozzáad";
             this.btnHozzaad.UseVisualStyleBackColor = true;
+            this.btnHozzaad.Click += new System.EventHandler(this.btnHozzaad_Click);
             // 
             // leirasTextBox
             // 
