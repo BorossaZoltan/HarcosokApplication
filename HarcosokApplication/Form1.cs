@@ -129,6 +129,41 @@ namespace HarcosokApplication
 
         private void btnHozzaad_Click(object sender, EventArgs e)
         {
+            kapcsolatLetrehozas();
+            if (hasznaloComboBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Válasszon ki egy használót!");
+                hasznaloComboBox.Focus();
+                return;
+            }
+            else if (kepessegNeveTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Írja be a képesség nevét!");
+                kepessegNeveTextBox.Focus();
+                return;
+            }
+            else if (leirasTextBox.Text.Trim() == "")
+            {
+                MessageBox.Show("Írjon egy leírást a képességhez!");
+                leirasTextBox.Focus();
+                return;
+            }
+
+            sql.CommandText = @"INSERT INTO `kepessegek`(`nev`, `leiras`, `harcos_id`) 
+                VALUES('"+kepessegNeveTextBox.Text.Trim()+"', '" + leirasTextBox.Text.Trim() + "', " +
+                "(SELECT id FROM harcosok WHERE nev = '"+hasznaloComboBox.SelectedItem+"'))";
+            if (sql.ExecuteNonQuery() == 1)
+            {
+                MessageBox.Show("Sikeresen rögzítve!");
+            }
+            else
+            {
+                MessageBox.Show("Nem sikerült rögzíteni!");
+            }
+            hasznaloComboBox.SelectedIndex = -1;
+            kepessegNeveTextBox.Text = "";
+            leirasTextBox.Text = "";
+            kapcsolatBontas();
 
         }
     }
