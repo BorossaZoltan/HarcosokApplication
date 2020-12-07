@@ -166,7 +166,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(208, 278);
+            this.label8.Location = new System.Drawing.Point(256, 278);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 13;
@@ -175,7 +175,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(388, 278);
+            this.label9.Location = new System.Drawing.Point(454, 278);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(89, 13);
             this.label9.TabIndex = 14;
@@ -183,26 +183,26 @@
             // 
             // kepessegLeirasaTextBox
             // 
-            this.kepessegLeirasaTextBox.Location = new System.Drawing.Point(391, 308);
+            this.kepessegLeirasaTextBox.Location = new System.Drawing.Point(457, 308);
             this.kepessegLeirasaTextBox.Multiline = true;
             this.kepessegLeirasaTextBox.Name = "kepessegLeirasaTextBox";
-            this.kepessegLeirasaTextBox.Size = new System.Drawing.Size(209, 100);
+            this.kepessegLeirasaTextBox.Size = new System.Drawing.Size(254, 100);
             this.kepessegLeirasaTextBox.TabIndex = 15;
             // 
             // btnTorles
             // 
-            this.btnTorles.Location = new System.Drawing.Point(211, 489);
+            this.btnTorles.Location = new System.Drawing.Point(259, 489);
             this.btnTorles.Name = "btnTorles";
-            this.btnTorles.Size = new System.Drawing.Size(75, 23);
+            this.btnTorles.Size = new System.Drawing.Size(100, 23);
             this.btnTorles.TabIndex = 16;
             this.btnTorles.Text = "Törlés";
             this.btnTorles.UseVisualStyleBackColor = true;
             // 
             // btnModosit
             // 
-            this.btnModosit.Location = new System.Drawing.Point(525, 414);
+            this.btnModosit.Location = new System.Drawing.Point(591, 414);
             this.btnModosit.Name = "btnModosit";
-            this.btnModosit.Size = new System.Drawing.Size(75, 23);
+            this.btnModosit.Size = new System.Drawing.Size(120, 23);
             this.btnModosit.TabIndex = 17;
             this.btnModosit.Text = "Módosít";
             this.btnModosit.UseVisualStyleBackColor = true;
@@ -210,9 +210,9 @@
             // kepessegekListBox
             // 
             this.kepessegekListBox.FormattingEnabled = true;
-            this.kepessegekListBox.Location = new System.Drawing.Point(211, 308);
+            this.kepessegekListBox.Location = new System.Drawing.Point(259, 308);
             this.kepessegekListBox.Name = "kepessegekListBox";
-            this.kepessegekListBox.Size = new System.Drawing.Size(146, 173);
+            this.kepessegekListBox.Size = new System.Drawing.Size(171, 173);
             this.kepessegekListBox.TabIndex = 18;
             // 
             // harcosokListBox
@@ -220,7 +220,7 @@
             this.harcosokListBox.FormattingEnabled = true;
             this.harcosokListBox.Location = new System.Drawing.Point(23, 308);
             this.harcosokListBox.Name = "harcosokListBox";
-            this.harcosokListBox.Size = new System.Drawing.Size(146, 173);
+            this.harcosokListBox.Size = new System.Drawing.Size(202, 173);
             this.harcosokListBox.TabIndex = 19;
             // 
             // Form1

@@ -37,8 +37,6 @@ namespace HarcosokApplication
             conn.Close();
         }
 
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -69,7 +67,21 @@ namespace HarcosokApplication
                 return;
             }
             hasznaloComboFeltolt();
+            harcosokListBoxFeltoltese();
             kapcsolatBontas();
+        }
+
+        private void harcosokListBoxFeltoltese()
+        {
+            harcosokListBox.Items.Clear();
+            sql.CommandText = "SELECT nev, letrehozas FROM harcosok WHERE 1";
+            using (MySqlDataReader dr = sql.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    harcosokListBox.Items.Add(dr.GetString("nev") +"\t"+dr.GetDateTime("letrehozas"));
+                }
+            }
         }
 
         private void hasznaloComboFeltolt()
@@ -119,12 +131,8 @@ namespace HarcosokApplication
                 }
                 
             }
-                        
+            harcosokListBoxFeltoltese();
                     kapcsolatBontas();
-             
-                        
-
-
         }
 
         private void btnHozzaad_Click(object sender, EventArgs e)
