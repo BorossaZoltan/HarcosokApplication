@@ -214,6 +214,7 @@
             this.kepessegekListBox.Name = "kepessegekListBox";
             this.kepessegekListBox.Size = new System.Drawing.Size(171, 173);
             this.kepessegekListBox.TabIndex = 18;
+            this.kepessegekListBox.SelectedIndexChanged += new System.EventHandler(this.kepessegekListBox_SelectedIndexChanged);
             // 
             // harcosokListBox
             // 

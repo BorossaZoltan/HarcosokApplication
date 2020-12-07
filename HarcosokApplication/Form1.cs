@@ -218,5 +218,27 @@ namespace HarcosokApplication
                 }
             kapcsolatBontas();
         }
+
+        private void kepessegekListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            kapcsolatLetrehozas();
+            if (kepessegekListBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Válasszon képességet!");
+                kepessegekListBox.Focus();
+                return;
+            }
+            kepessegLeirasaTextBox.Text = "";
+            sql.CommandText = @"SELECT `leiras` FROM `kepessegek` WHERE `nev` = '"+kepessegekListBox.SelectedItem+"';";
+            using (MySqlDataReader dr = sql.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    kepessegLeirasaTextBox.Text = dr.GetString("leiras");
+                }
+            }
+
+            kapcsolatBontas();
+        }
     }
 }
