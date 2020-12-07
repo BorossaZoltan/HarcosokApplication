@@ -222,6 +222,7 @@
             this.harcosokListBox.Name = "harcosokListBox";
             this.harcosokListBox.Size = new System.Drawing.Size(202, 173);
             this.harcosokListBox.TabIndex = 19;
+            this.harcosokListBox.SelectedIndexChanged += new System.EventHandler(this.harcosokListBox_SelectedIndexChanged);
             // 
             // Form1
             // 

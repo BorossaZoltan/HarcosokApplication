@@ -70,7 +70,7 @@ namespace HarcosokApplication
             harcosokListBoxFeltoltese();
             kapcsolatBontas();
         }
-
+        
         private void harcosokListBoxFeltoltese()
         {
             harcosokListBox.Items.Clear();
@@ -79,7 +79,8 @@ namespace HarcosokApplication
             {
                 while (dr.Read())
                 {
-                    harcosokListBox.Items.Add(dr.GetString("nev") +"\t"+dr.GetDateTime("letrehozas"));
+                    
+                    harcosokListBox.Items.Add(dr.GetString("nev") +" \t"+dr.GetDateTime("letrehozas"));
                 }
             }
         }
@@ -120,6 +121,7 @@ namespace HarcosokApplication
                     sql.CommandText = "INSERT INTO harcosok (`nev`, `letrehozas`) VALUES ('" + nev + "', '" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
                     sql.ExecuteNonQuery();
                     harcosNeveTextBox.Clear();
+                    harcosokListBoxFeltoltese();
                     MessageBox.Show("Sikeres harcos felvétel!");
                     harcosNeveTextBox.Focus();
                     hasznaloComboFeltolt();
@@ -131,7 +133,6 @@ namespace HarcosokApplication
                 }
                 
             }
-            harcosokListBoxFeltoltese();
                     kapcsolatBontas();
         }
 
@@ -162,6 +163,7 @@ namespace HarcosokApplication
                 "(SELECT id FROM harcosok WHERE nev = '"+hasznaloComboBox.SelectedItem+"'))";
             if (sql.ExecuteNonQuery() == 1)
             {
+                kepessegekListBoxFrissit();
                 MessageBox.Show("Sikeresen rögzítve!");
             }
             else
@@ -173,6 +175,48 @@ namespace HarcosokApplication
             leirasTextBox.Text = "";
             kapcsolatBontas();
 
+        }
+
+        private void kepessegekListBoxFrissit()
+        {
+            if (harcosokListBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Válasszon harcost!");
+                harcosokListBox.Focus();
+                return;
+            }
+            kepessegekListBox.Items.Clear();
+            string[] szo = harcosokListBox.SelectedItem.ToString().Split(' ');
+            sql.CommandText = @"SELECT `nev` FROM `kepessegek` WHERE `harcos_id` = (SELECT `id` FROM `harcosok` WHERE `nev` LIKE '" + szo[0] + "%')";
+            using (MySqlDataReader dr = sql.ExecuteReader())
+            {
+                while (dr.Read())
+                {
+                    kepessegekListBox.Items.Add(dr.GetString("nev"));
+                }
+            }
+        }
+
+        private void harcosokListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            kapcsolatLetrehozas();
+            if (harcosokListBox.SelectedIndex < 0)
+            {
+                MessageBox.Show("Válasszon harcost!");
+                harcosokListBox.Focus();
+                return;
+            }
+            kepessegekListBox.Items.Clear();
+            string[] szo = harcosokListBox.SelectedItem.ToString().Split(' ');
+                sql.CommandText = @"SELECT `nev` FROM `kepessegek` WHERE `harcos_id` = (SELECT `id` FROM `harcosok` WHERE `nev` LIKE '"+szo[0]+"%')";
+                using (MySqlDataReader dr = sql.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        kepessegekListBox.Items.Add(dr.GetString("nev"));
+                    }
+                }
+            kapcsolatBontas();
         }
     }
 }
